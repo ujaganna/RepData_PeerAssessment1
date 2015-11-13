@@ -1,11 +1,11 @@
-title: "Reproducible Research: Peer Assessment 1"
+title: "Reproducible Research: Peer Assessment1"
 output: 
   html_document:
     keep_md: true
 ---
 
 
-## Loading and preprocessing the data
+## Loading and preprocessing the data.
 
 ```r
 setwd("C:/Users/Adarsh/Desktop/Coursera/repres")
