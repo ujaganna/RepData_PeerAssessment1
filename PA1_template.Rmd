@@ -1,5 +1,5 @@
 ---
-title: "Reproducible Research: Peer Assessment1"
+title: "Reproducible Research: Peer Assessment 1"
 output: 
   html_document:
     keep_md: true
@@ -33,7 +33,8 @@ plot(row.names(time_series), time_series, type = "l", xlab = "5-min interval",
 
 ## Imputing missing values
 ### This procedure will take the data into a data frame and use 2 for loops to
-### populate any NA values in the steps data. The data populated will be from the ### summary for the time interval (across dates) in question where the NA occurs
+### populate any NA values in the steps data. The data populated will be from the 
+### summary for the time interval (across dates) in question where the NA occurs
 ### a histogram is generated after values are imputed
 ```{r}
 MyData <- y
