@@ -203,13 +203,8 @@ hr {
 <body>
 <h2>Loading and preprocessing the data</h2>
 
-<pre><code class="r">setwd(&quot;C:/Users/Uday/Desktop/Coursera/repres&quot;)
-</code></pre>
-
-<pre><code>## Error in setwd(&quot;C:/Users/Uday/Desktop/Coursera/repres&quot;): cannot change working directory
-</code></pre>
-
-<pre><code class="r">y &lt;- read.csv(&quot;activity.csv&quot;, header=TRUE)
+<pre><code class="r">setwd(&quot;C:/Users/Adarsh/Desktop/Coursera/repres&quot;)
+y &lt;- read.csv(&quot;activity.csv&quot;, header=TRUE)
 x &lt;- subset(y, !(is.na(steps)))
 z &lt;- aggregate(x$steps, FUN= sum, list(x$date))
 z3 &lt;- aggregate(x$steps, FUN= mean, list(x$interval))

@@ -1,5 +1,5 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
+title: "Reproducible Research: Peer Assessment1"
 output: 
   html_document:
     keep_md: true
@@ -10,14 +10,7 @@ output:
 
 
 ```r
-setwd("C:/Users/Uday/Desktop/Coursera/repres")
-```
-
-```
-## Error in setwd("C:/Users/Uday/Desktop/Coursera/repres"): cannot change working directory
-```
-
-```r
+setwd("C:/Users/Adarsh/Desktop/Coursera/repres")
 y <- read.csv("activity.csv", header=TRUE)
 x <- subset(y, !(is.na(steps)))
 z <- aggregate(x$steps, FUN= sum, list(x$date))

@@ -9,7 +9,7 @@ output:
 ## Loading and preprocessing the data
 
 ```{r}
-setwd("C:/Users/Uday/Desktop/Coursera/repres")
+setwd("C:/Users/Adarsh/Desktop/Coursera/repres")
 y <- read.csv("activity.csv", header=TRUE)
 x <- subset(y, !(is.na(steps)))
 z <- aggregate(x$steps, FUN= sum, list(x$date))
