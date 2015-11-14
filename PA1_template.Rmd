@@ -1,3 +1,4 @@
+---
 title: "Reproducible Research: Peer Assessment1"
 output: 
   html_document:
@@ -5,23 +6,22 @@ output:
 ---
 
 
-## Loading and preprocessing the data.
+## Loading and preprocessing the data
+
 ```{r}
-setwd("C:/Users/Adarsh/Desktop/Coursera/repres")
+setwd("C:/Users/Uday/Desktop/Coursera/repres")
 y <- read.csv("activity.csv", header=TRUE)
 x <- subset(y, !(is.na(steps)))
 z <- aggregate(x$steps, FUN= sum, list(x$date))
 z3 <- aggregate(x$steps, FUN= mean, list(x$interval))
-hist(z$x, xlab = "#steps", main = "Histogram of #steps")
 ```
-
 
 ## What is mean total number of steps taken per day?
 ```{r}
+hist(z$x, xlab = "#steps", main = "Histogram of #steps")
 mean(z$x)
 median(z$x)
 ```
-
 
 ## What is the average daily activity pattern?
 ```{r}
@@ -32,6 +32,9 @@ plot(row.names(time_series), time_series, type = "l", xlab = "5-min interval",
 ```
 
 ## Imputing missing values
+### This procedure will take the data into a data frame and use 2 for loops to
+### populate any NA values in the steps data. The data populated will be from the ### summary for the time interval (across dates) in question where the NA occurs
+### a histogram is generated after values are imputed
 ```{r}
 MyData <- y
 for (i in 1:nrow(MyData))
@@ -44,6 +47,9 @@ for (i in 1:nrow(MyData))
       }
 
 write.csv(MyData, file = "MyData.csv")
+z <- aggregate(MyData$steps, FUN= sum, list(MyData$date))
+hist(z$x, xlab = "#steps", main = "Histogram of #steps after imputing values")
+
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?
@@ -61,5 +67,4 @@ names(stepsByDaytype) <- c("interval", "daytype", "steps")
 library(lattice)
 xyplot(steps ~ interval | daytype, stepsByDaytype, type = "l", layout = c(1, 2), 
       xlab = "Interval", ylab = "Number of steps")
-```   
-
+```

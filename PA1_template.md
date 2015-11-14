@@ -1,25 +1,29 @@
-title: "Reproducible Research: Peer Assessment 1"
+---
+title: "Reproducible Research: Peer Assessment1"
 output: 
   html_document:
     keep_md: true
 ---
 
 
-## Loading and preprocessing the data.
+## Loading and preprocessing the data
+
 
 ```r
-setwd("C:/Users/Adarsh/Desktop/Coursera/repres")
+setwd("C:/Users/Uday/Desktop/Coursera/repres")
 y <- read.csv("activity.csv", header=TRUE)
 x <- subset(y, !(is.na(steps)))
 z <- aggregate(x$steps, FUN= sum, list(x$date))
 z3 <- aggregate(x$steps, FUN= mean, list(x$interval))
+```
+
+## What is mean total number of steps taken per day?
+
+```r
 hist(z$x, xlab = "#steps", main = "Histogram of #steps")
 ```
 
-![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png) 
-
-
-## What is mean total number of steps taken per day?
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png) 
 
 ```r
 mean(z$x)
@@ -37,7 +41,6 @@ median(z$x)
 ## [1] 10765
 ```
 
-
 ## What is the average daily activity pattern?
 
 ```r
@@ -50,6 +53,9 @@ plot(row.names(time_series), time_series, type = "l", xlab = "5-min interval",
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
 
 ## Imputing missing values
+### This procedure will take the data into a data frame and use 2 for loops to
+### populate any NA values in the steps data. The data populated will be from the ### summary for the time interval (across dates) in question where the NA occurs
+### a histogram is generated after values are imputed
 
 ```r
 MyData <- y
@@ -63,7 +69,11 @@ for (i in 1:nrow(MyData))
       }
 
 write.csv(MyData, file = "MyData.csv")
+z <- aggregate(MyData$steps, FUN= sum, list(MyData$date))
+hist(z$x, xlab = "#steps", main = "Histogram of #steps after imputing values")
 ```
+
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
@@ -84,4 +94,3 @@ xyplot(steps ~ interval | daytype, stepsByDaytype, type = "l", layout = c(1, 2),
 ```
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
-
