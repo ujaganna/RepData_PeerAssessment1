@@ -9,7 +9,7 @@ output:
 ## Loading and preprocessing the data
 
 ```{r}
-setwd("C:/Users/Adarsh/Desktop/Coursera/repres")
+setwd("C:/Users/Adarsh/repdata_peerassessment1")
 y <- read.csv("activity.csv", header=TRUE)
 x <- subset(y, !(is.na(steps)))
 z <- aggregate(x$steps, FUN= sum, list(x$date))
@@ -17,10 +17,14 @@ z3 <- aggregate(x$steps, FUN= mean, list(x$interval))
 ```
 
 ## What is mean total number of steps taken per day?
+### first draw a histogram
+### report the mean value and median value 
+### finally report the interval of max steps
 ```{r}
 hist(z$x, xlab = "#steps", main = "Histogram of #steps")
 mean(z$x)
 median(z$x)
+z3[which(z3$x == max(z3$x)), ]
 ```
 
 ## What is the average daily activity pattern?
@@ -36,6 +40,7 @@ plot(row.names(time_series), time_series, type = "l", xlab = "5-min interval",
 ### populate any NA values in the steps data. The data populated will be from the 
 ### summary for the time interval (across dates) in question where the NA occurs
 ### a histogram is generated after values are imputed
+### finally the interval of max steps
 ```{r}
 MyData <- y
 for (i in 1:nrow(MyData))
@@ -50,7 +55,8 @@ for (i in 1:nrow(MyData))
 write.csv(MyData, file = "MyData.csv")
 z <- aggregate(MyData$steps, FUN= sum, list(MyData$date))
 hist(z$x, xlab = "#steps", main = "Histogram of #steps after imputing values")
-
+z3 <- aggregate(MyData$steps, FUN= mean, list(MyData$interval))
+z3[which(z3$x == max(z3$x)), ]
 ```
 
 ## Are there differences in activity patterns between weekdays and weekends?

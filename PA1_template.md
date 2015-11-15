@@ -10,7 +10,7 @@ output:
 
 
 ```r
-setwd("C:/Users/Adarsh/Desktop/Coursera/repres")
+setwd("C:/Users/Adarsh/repdata_peerassessment1")
 y <- read.csv("activity.csv", header=TRUE)
 x <- subset(y, !(is.na(steps)))
 z <- aggregate(x$steps, FUN= sum, list(x$date))
@@ -18,6 +18,9 @@ z3 <- aggregate(x$steps, FUN= mean, list(x$interval))
 ```
 
 ## What is mean total number of steps taken per day?
+### first draw a histogram
+### report the mean value and median value 
+### finally report the interval of max steps
 
 ```r
 hist(z$x, xlab = "#steps", main = "Histogram of #steps")
@@ -41,6 +44,15 @@ median(z$x)
 ## [1] 10765
 ```
 
+```r
+z3[which(z3$x == max(z3$x)), ]
+```
+
+```
+##     Group.1        x
+## 104     835 206.1698
+```
+
 ## What is the average daily activity pattern?
 
 ```r
@@ -54,8 +66,10 @@ plot(row.names(time_series), time_series, type = "l", xlab = "5-min interval",
 
 ## Imputing missing values
 ### This procedure will take the data into a data frame and use 2 for loops to
-### populate any NA values in the steps data. The data populated will be from the ### summary for the time interval (across dates) in question where the NA occurs
+### populate any NA values in the steps data. The data populated will be from the 
+### summary for the time interval (across dates) in question where the NA occurs
 ### a histogram is generated after values are imputed
+### finally the interval of max steps
 
 ```r
 MyData <- y
@@ -74,6 +88,16 @@ hist(z$x, xlab = "#steps", main = "Histogram of #steps after imputing values")
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+
+```r
+z3 <- aggregate(MyData$steps, FUN= mean, list(MyData$interval))
+z3[which(z3$x == max(z3$x)), ]
+```
+
+```
+##     Group.1        x
+## 104     835 206.1698
+```
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
